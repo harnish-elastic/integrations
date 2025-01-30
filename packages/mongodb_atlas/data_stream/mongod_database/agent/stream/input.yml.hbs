@@ -60,6 +60,8 @@ program: |
               bytes(resp.Body).decode_json().as(body,
                 {
                   "hostlist": body.results.map(e, e.hostname),
+                  "shard_name": body.results.map(e, e.userAlias),
+                  "type_name": body.results.map(e, e.typeName),
                   "next": 0,
                   "page_num": body.links.exists_one(res, res.rel == "next") ? (int(state.page_num) + 1) : 1,
                 }
@@ -108,11 +110,13 @@ program: |
         (resp.StatusCode == 200 && resp.ContentLength != 0) ?
           string(bytes(resp.Body).mime("application/gzip")).as(body,
             {
-              "events": body.trim_space().split("\n").map(value, {"message": value, "host_name": state.hostlist[state.next]}),
+              "events": body.trim_space().split("\n").map(value, {"message": value, "host_name": state.hostlist[state.next], "shard_name": state.shard_name[state.next], "type_name": state.type_name[state.next]}),
               "cursor": {
                 "last_timestamp": state.endDate,
               },
               "hostlist": (int(state.next) + 1 < size(state.hostlist)) ? state.hostlist : [],
+              "shard_name": (int(state.next)+1) < size(state.shard_name) ? state.shard_name : [],
+              "type_name": (int(state.next)+1) < size(state.type_name) ? state.type_name : [],
               "next": (int(state.next) + 1 < size(state.hostlist)) ? (int(state.next) + 1) : 0,
               "want_more": int(state.next) + 1 < size(state.hostlist) || state.page_num != 1,
               "page_num": state.page_num,
@@ -131,6 +135,8 @@ program: |
               "last_timestamp": state.endDate,
             },
             "hostlist": (int(state.next) + 1 < size(state.hostlist)) ? state.hostlist : [],
+            "shard_name": (int(state.next)+1) < size(state.shard_name) ? state.shard_name : [],
+            "type_name": (int(state.next)+1) < size(state.type_name) ? state.type_name : [],
             "next": (int(state.next) + 1 < size(state.hostlist)) ? (int(state.next) + 1) : 0,
             "want_more": int(state.next) + 1 < size(state.hostlist) || state.page_num != 1,
             "page_num": state.page_num,

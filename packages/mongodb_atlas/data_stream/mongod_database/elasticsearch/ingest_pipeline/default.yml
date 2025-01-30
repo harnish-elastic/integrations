@@ -31,6 +31,19 @@ processors:
       field: host_name
       target_field: mongodb_atlas.mongod_database.hostname
       ignore_missing: true
+  - grok:
+      field: shard_name
+      patterns:
+        - "%{GREEDYDATA:mongodb_atlas.mongod_database.shard.name}-shard"
+      if: ctx.shard_name != null
+  - rename:
+      field: shard_name
+      target_field: mongodb_atlas.mongod_database.user_alias
+      ignore_missing: true
+  - rename:
+      field: type_name
+      target_field: mongodb_atlas.mongod_database.shard.type
+      ignore_missing: true
   - json:
       field: event.original
       target_field: json

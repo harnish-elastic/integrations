@@ -7,6 +7,9 @@
     - name: component
       type: keyword
       description: The component field indicates the category to which a logged event belongs, such as NETWORK or COMMAND.
+    - name: database.name
+      type: keyword
+      description: Database name.
     - name: hostname
       type: keyword
       description: A human-readable label that identifies the host that stores the log files you want to download.
@@ -16,6 +19,15 @@
     - name: message
       type: match_only_text
       description: The log output message passed from the server or driver. If necessary, the message is escaped according to the JSON specification.
+    - name: shard
+      type: group
+      fields:
+        - name: name
+          type: keyword
+          description: Shard name.
+        - name: type
+          type: keyword
+          description: Shard type.
     - name: size
       type: object
       object_type: keyword
@@ -29,3 +41,6 @@
     - name: truncated
       type: flattened
       description: Information about log message truncation, if applicable. Only included if the log entry contains at least one truncated attr attribute.
+    - name: user_alias
+      type: keyword
+      description: Human-readable label that identifies the user that caused the log statement.
