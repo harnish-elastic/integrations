@@ -382,8 +382,7 @@ Please refer to the following [document](https://www.elastic.co/guide/en/ecs/cur
 | data_stream.namespace | Data stream namespace. | constant_keyword |  |
 | data_stream.type | Data stream type. | constant_keyword |  |
 | host.name | Name of the host. It can contain what hostname returns on Unix systems, the fully qualified domain name (FQDN), or a name specified by the user. The recommended value is the lowercase FQDN of the host. | keyword |  |
-| ibmmq.labels.job | Prometheus label job. | keyword |  |
-| ibmmq.labels.qmgr | Name of Queue Manager. | keyword |  |
+| ibmmq.labels.\* | Prometheus metric labels. | keyword |  |
 | ibmmq.qmgr.calls.failed.callback.count | Failed MQCB count. | long | counter |
 | ibmmq.qmgr.calls.failed.close.count | Failed MQCLOSE count. | long | counter |
 | ibmmq.qmgr.calls.failed.connections.count | Failed MQCONN/MQCONNX count. | long | counter |
@@ -402,8 +401,23 @@ Please refer to the following [document](https://www.elastic.co/guide/en/ecs/cur
 | ibmmq.qmgr.calls.succeeded.set.count | MQSET count. | long | counter |
 | ibmmq.qmgr.calls.succeeded.status.count | MQSTAT count. | long | counter |
 | ibmmq.qmgr.calls.succeeded.subscription_request.count | MQSUBRQ count. | long | counter |
+| ibmmq.qmgr.channel.initiator.status | Status of the channel initiator. | keyword |  |
+| ibmmq.qmgr.command.server.status | Status of the command server. | keyword |  |
+| ibmmq.qmgr.concurrent_connections.high.watermark | High watermark for concurrent connections. | long |  |
+| ibmmq.qmgr.connections.count | Number of connections. | long |  |
 | ibmmq.qmgr.destructive.get.bytes | Interval total destructive get - byte count. | long | counter |
 | ibmmq.qmgr.destructive.get.count | Interval total destructive get - count. | long | counter |
+| ibmmq.qmgr.exporter.collection.time | Time taken for metric collection. | double |  |
+| ibmmq.qmgr.exporter.publications | Number of publications by the exporter. | long |  |
+| ibmmq.qmgr.listeners.active | Number of active listeners. | long |  |
+| ibmmq.qmgr.log.extent.archive | Log extent archive. | long |  |
+| ibmmq.qmgr.log.extent.current | Current log extent. | long |  |
+| ibmmq.qmgr.log.extent.media | Log extent media. | long |  |
+| ibmmq.qmgr.log.extent.restart | Log extent restart. | long |  |
+| ibmmq.qmgr.log.size.archive | Log size archive. | long |  |
+| ibmmq.qmgr.log.size.media | Log size media. | long |  |
+| ibmmq.qmgr.log.size.restart | Log size restart. | long |  |
+| ibmmq.qmgr.log.size.reusable | Reusable log size. | long |  |
 | ibmmq.qmgr.log.written.bytes.logical | Log - logical bytes written. | long | counter |
 | ibmmq.qmgr.log.written.bytes.physical | Log - physical bytes written. | long | counter |
 | ibmmq.qmgr.messages.commit.count | Commit count. | long | counter |
@@ -430,7 +444,13 @@ Please refer to the following [document](https://www.elastic.co/guide/en/ecs/cur
 | ibmmq.qmgr.messages.published.subscribers.bytes | Published to subscribers - byte count. | long | counter |
 | ibmmq.qmgr.messages.published.subscribers.count | Published to subscribers - message count. | long | counter |
 | ibmmq.qmgr.messages.purged.queue.count | Purged queue count. | long | counter |
+| ibmmq.qmgr.ram.total.bytes | Total RAM in bytes. | long |  |
 | ibmmq.qmgr.rollback.count | Rollback count. | long | counter |
+| ibmmq.qmgr.status | Queue manager status. | keyword |  |
+| ibmmq.qmgr.subscriber.durable.high.watermark | High watermark for durable subscribers. | long |  |
+| ibmmq.qmgr.subscriber.durable.low.watermark | Low watermark for durable subscribers. | long |  |
+| ibmmq.qmgr.subscriber.non_durable.high.watermark | High watermark for non-durable subscribers. | long |  |
+| ibmmq.qmgr.subscriber.non_durable.low.watermark | Low watermark for non-durable subscribers. | long |  |
 | ibmmq.qmgr.subscription.durable.alter.count | Alter durable subscription count. | long | counter |
 | ibmmq.qmgr.subscription.durable.create.count | Create durable subscription count. | long | counter |
 | ibmmq.qmgr.subscription.durable.delete.count | Delete durable subscription count. | long | counter |
@@ -444,6 +464,7 @@ Please refer to the following [document](https://www.elastic.co/guide/en/ecs/cur
 | ibmmq.qmgr.topic.mq.put.non_persistent.count | Non-persistent - topic MQPUT/MQPUT1 count. | long | counter |
 | ibmmq.qmgr.topic.mq.put.persistent.count | Persistent - topic MQPUT/MQPUT1 count. | long | counter |
 | ibmmq.qmgr.topic.put.bytes | Interval total topic bytes put. | long | counter |
+| ibmmq.qmgr.uptime | Queue manager uptime in seconds. | long |  |
 | service.address | Address where data about this service was collected from. This should be a URI, network address (ipv4:port or [ipv6]:port) or a resource path (sockets). | keyword |  |
 
 

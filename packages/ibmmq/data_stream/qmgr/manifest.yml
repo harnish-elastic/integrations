@@ -3,6 +3,14 @@ title: IBM MQ Queue Manager performance metrics
 streams:
   - input: prometheus/metrics
     vars:
+      - name: setup
+        required: true
+        show_user: true
+        title: Containerized
+        description: Containerized.
+        type: bool
+        multi: false
+        default: true
       - name: period
         type: text
         title: Period

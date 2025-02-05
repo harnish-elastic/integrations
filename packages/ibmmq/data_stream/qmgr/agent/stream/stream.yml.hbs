@@ -17,6 +17,9 @@ password: "{{password}}"
 {{ssl}}
 {{/if}}
 tags:
+{{#if setup}}
+  - containerized
+{{/if}}
 {{#each tags as |tag|}}
   - {{tag}}
 {{/each}}

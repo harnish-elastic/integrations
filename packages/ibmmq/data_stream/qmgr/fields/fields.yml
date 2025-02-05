@@ -328,16 +328,95 @@
               type: long
               metric_type: counter
               description: Interval total topic bytes put.
-    - name: labels
-      type: group
-      fields:
-        - name: job
-          #Reason to add as dimension field: Job name identifies the name of the job. Multi-value exists
+        - name: channel.initiator.status
           type: keyword
-          dimension: true
-          description: Prometheus label job.
-        - name: qmgr
+          description: Status of the channel initiator.
+        - name: command.server.status
           type: keyword
-          #Reason to add as dimension field: Multiple queue managers can be configured.
-          dimension: true
-          description: Name of Queue Manager.
+          description: Status of the command server.
+        - name: concurrent_connections.high.watermark
+          type: long
+          description: High watermark for concurrent connections.
+        - name: connections.count
+          type: long
+          description: Number of connections.
+        - name: exporter
+          type: group
+          fields:
+            - name: collection.time
+              type: double
+              description: Time taken for metric collection.
+            - name: publications
+              type: long
+              description: Number of publications by the exporter.
+        - name: listeners.active
+          type: long
+          description: Number of active listeners.
+        - name: log
+          type: group
+          fields:
+            - name: extent
+              type: group
+              fields:
+                - name: archive
+                  type: long
+                  description: Log extent archive.
+                - name: current
+                  type: long
+                  description: Current log extent.
+                - name: media
+                  type: long
+                  description: Log extent media.
+                - name: restart
+                  type: long
+                  description: Log extent restart.
+            - name: size
+              type: group
+              fields:
+                - name: archive
+                  type: long
+                  description: Log size archive.
+                - name: media
+                  type: long
+                  description: Log size media.
+                - name: restart
+                  type: long
+                  description: Log size restart.
+                - name: reusable
+                  type: long
+                  description: Reusable log size.
+        - name: ram.total.bytes
+          type: long
+          description: Total RAM in bytes.
+        - name: status
+          type: keyword
+          description: Queue manager status.
+        - name: subscriber
+          type: group
+          fields:
+            - name: durable
+              type: group
+              fields:
+                - name: high.watermark
+                  type: long
+                  description: High watermark for durable subscribers.
+                - name: low.watermark
+                  type: long
+                  description: Low watermark for durable subscribers.
+            - name: non_durable
+              type: group
+              fields:
+                - name: high.watermark
+                  type: long
+                  description: High watermark for non-durable subscribers.
+                - name: low.watermark
+                  type: long
+                  description: Low watermark for non-durable subscribers.
+        - name: uptime
+          type: long
+          description: Queue manager uptime in seconds.
+    - name: labels.*
+      type: keyword
+      dimension: true
+      description: |
+        Prometheus metric labels.
